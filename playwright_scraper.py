@@ -133,12 +133,13 @@ def scrape_listing(url, max_products=40, wait_for_load=2000):
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page()
-        page.goto(url, timeout=30000)
+        # Timeout aumentado a 60000 ms
+        page.goto(url, timeout=60000)
         page.wait_for_timeout(wait_for_load)
         product_links = collect_product_links_from_listing(page, url, max_links=max_products)
         for link in product_links:
             try:
-                page.goto(link, timeout=30000)
+                page.goto(link, timeout=60000)  # Timeout aumentado
                 page.wait_for_timeout(1200)
                 info = extract_product_info_from_page(page, link)
                 results.append(info)
