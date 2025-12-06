@@ -134,7 +134,7 @@ def scrape_listing(url, max_products=40, wait_for_load=2000):
         # Lanzar navegador en modo headless y sin sandbox
         browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
         page = browser.new_page()
-        # Timeout aumentado y wait_until para evitar bloqueos
+        # Timeout aumentado y wait_until para cargar solo DOM
         page.goto(url, timeout=60000, wait_until="domcontentloaded")
         page.wait_for_timeout(wait_for_load)
         product_links = collect_product_links_from_listing(page, url, max_links=max_products)
