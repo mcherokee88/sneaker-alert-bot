@@ -6,3 +6,4 @@ with sync_playwright() as p:
     page.goto("https://example.com")
     print(page.title())
     browser.close()
+notify_telegram("🚀 Prueba de mensaje desde el bot de sneakers!")
